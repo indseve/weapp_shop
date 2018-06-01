@@ -1,0 +1,32 @@
+@import '../../common/common.wxss';
+@import '../../common/weui.wxss';
+.picker{
+    height: 90rpx;
+    text-align: right;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.form-box{
+    padding-left: 30rpx;
+}
+.form-box input{
+    height: 90rpx;
+    border-bottom: 1rpx solid #ededed;
+    color: #999;
+}
+.form-box .input-placeholder{
+    color: #aaa;
+}
+.form-box button{
+    margin:30rpx 30rpx 0 0;
+}
+.address{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1rpx solid #ededed;
+    color: #999;
+    align-items: center;
+}

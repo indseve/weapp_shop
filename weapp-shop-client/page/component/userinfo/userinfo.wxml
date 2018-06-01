@@ -1,0 +1,11 @@
+<!--page/component/userinfo/userinfo.wxml-->
+<view class="main">
+    <view class="form-box">
+        <form bindsubmit="formSubmit">
+            <input value="{{address.name}}" name="name" placeholder="姓名" />
+            <input type="number" name="tel" value="{{address.tel}}" placeholder="电话号码" />
+            <input type="number" name="qq" value="{{address.tel}}" placeholder="QQ" />           
+            <button form-type="submit">保存</button>
+        </form>
+    </view>
+</view>

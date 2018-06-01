@@ -1,0 +1,11 @@
+//"start": "node ./bin/www"
+
+#废弃的mock方法
+let getCommodity = function (res) {
+    res.send(commodity);
+}
+
+let getDetail = function (req,res) {
+    let selected = commodity.find(p => p.no == req.query.no);
+    res.send(selected);
+}
