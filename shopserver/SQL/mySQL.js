@@ -19,14 +19,35 @@ const queryPromise = function (myQuery) {
     })
 }
 
+
+// const queryPromise = function (myQuery) {
+//     return new Promise((resolve, reject) => {
+//         pool.getConnection(function (err, connection) {
+//             if (err) {
+//                 reject(err)
+//             } else {
+//                 connection.query(myQuery, (err, rows) => {
+//                     if (err) {
+//                         reject(err)
+//                     } else {
+//                         resolve(rows)
+//                     } // 结束会话 
+//                     connection.release()
+//                 })
+//             }
+//         })
+//     })
+// }
+
+
 const queryAsync = async (myQuery)=>{
-    let result = await queryPromise(myQuery);
-     //console.log(ccp);
-     return result;
+    let result = await queryPromise(myQuery);  
+    console.log(result)   
+    return result;
  }
 
 
 
  export {
-     queryAsync
+     queryPromise
  }

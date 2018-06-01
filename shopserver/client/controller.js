@@ -24,7 +24,7 @@ let getCommodity = async (req, res)=>{
     res.send(result);
 }
 
-let getRow = function (req, res) {
+let getRow = async (req, res)=>{
     let result = await mySQL.queryPromise('select  * from user_address');
     
 }
@@ -42,14 +42,11 @@ let getAddress = async (req, res) => {
 let addressAdd = async (req, res) => {
     let myQuery = `insert into user_address (name,province,city,district,detail,tel,openid) value ('${req.body.name}','${req.body.province}','${req.body.province}','${req.body.district}','${req.body.detail}','${req.body.tel}','${req.body.openid}')`;
     let result = await mySQL.queryPromise(myQuery);
-    result.then(data => {
+    try {
         res.send('ok');
-        console.log(data)
-    }).catch(data => {
-        res.send(data)
-    })
-    res.send('ok');
-    console.log(req.body);
+    } catch (error) {
+        res.send('fail')
+    }
 }
 
 let addressModify = async (req, res) => {
@@ -93,7 +90,7 @@ let delCart = async (req, res) => {
 
 let modifyCart = async (req, res) => {
     console.log(req.body.carts);
-    req.body.carts.forEach(element => {
+    req.body.carts.forEach( async (element) => {
         let myQuery = `UPDATE cart SET num = '${element.num}' WHERE openid = ${req.body.openid} AND pid = ${element.pid}`;
         let result = await mySQL.queryPromise(myQuery);
         try {
@@ -136,7 +133,7 @@ let addBill = async (req, res) => {
     let insertMyQuery = `insert into t_bill (billno,createtime,fee,openid) value ('${billNO}','${date}','${req.body.fee}','${req.body.openid}')`;
     let insertResult = await mySQL.queryPromise(myQuery1);
     try {
-        req.body.goods.forEach(element => {
+        req.body.goods.forEach( async (element) => {
             let myQuery = `insert into bill_product (billno,pid,number) value (${billNO},${element.pid},${element.num})`;
             let result = await mySQL.queryPromise(myQuery);
             try {

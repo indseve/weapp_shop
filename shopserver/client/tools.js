@@ -4,16 +4,12 @@ var originNO = 0;
 
 
 
-const getOriginNo = () => {
+const getOriginNo = async() => {
     if (originNO == 0) {
         let myQuery = `SELECT COUNT(billno) as no FROM t_bill`;
-        let result = mySQL.queryAsync(myQuery);
-        result.then(
-            data => {
-                console.log(data[0].no)
-                originNO = data[0].no;
-            }
-        )
+        let result = await mySQL.queryPromise(myQuery);
+        originNO = result[0].no;
+        console.log(originNO);
     }
 }
 
