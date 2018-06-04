@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-//import {commodity} from '../source/newest';
-
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {

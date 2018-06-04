@@ -1,11 +1,8 @@
-import {
-    commodity
-} from "../source/newest";
 import * as mySQL from "../SQL/mySQL";
 import * as tools from './tools'
-import {
-    fail
-} from "assert";
+// import {
+//     fail
+// } from "assert";
 
 let getDetail = async (req, res)=>{
     let myQuery = `SELECT a.pid,productname AS name,price,describle AS detail,status,parameter,service,weight,url as image FROM t_product AS a LEFT JOIN t_product_image AS b ON a.pid = b.pid WHERE a.pid = ${req.query.pid}`;

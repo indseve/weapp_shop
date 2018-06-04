@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 import * as controller from '../client/controller';
 import { getRow } from "../SQL/mySQL";
-//import {getRow} from '../test'
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', {
@@ -21,6 +20,7 @@ router.get('/test',function(req,res,next){
 router.post('/openid',function(req,res) {
   
 })
+
 
 /**************************************************************************************************************** */
 /*******************************************地址管理************************************************************** */
