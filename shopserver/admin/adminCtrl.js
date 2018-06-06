@@ -13,13 +13,19 @@ let getProducts = async (req, res)=>{
 
 let addProduct = async (req,res)=>{
     let date = tools.getNowFormatDate();
-    console.log(date)
     let myQuery = `insert into t_product (productname,price,description,status,parameter,service,weight,createtime) value ('${req.body.productname}','${req.body.price}','${req.body.description}','${req.body.status}','${req.body.parameter}','${req.body.service}','${req.body.weight}','${date}')`;
-    let result = await await mySQL.queryPromise(myQuery);
+    let result = await mySQL.queryPromise(myQuery);
     try {
-        res.send('success')
+        res.send({
+            info:'success',
+            code: 20000
+        })
+        console.log('success')
     } catch (error) {
-        res.send('fail')
+        res.send({
+            info:'fail',
+            code: 20000
+        })
     }
 }
 
