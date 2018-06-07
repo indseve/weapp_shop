@@ -3,7 +3,9 @@ var router = express.Router();
 
 import * as admin from '../admin/adminCtrl'
 
-
+router.post('/login',(req,res)=>{
+  admin.login(req,res);
+})
 /* GET admin listing. */
 router.get('/', function(req, res, next) {
   console.log('get product')
@@ -20,6 +22,14 @@ router.post('/addProduct',(req,res)=>{
 
 router.post('/modifyIsuse',(req,res)=>{
   admin.modifyIsuse(req,res);
+})
+
+router.get('/orders',(req,res)=>{
+  admin.getOrders(req,res);
+})
+
+router.post('/getBillProducts',(req,res)=>{
+  admin.getBillProducts(req,res);
 })
 
 module.exports = router;

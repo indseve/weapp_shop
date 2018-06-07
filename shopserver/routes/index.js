@@ -64,7 +64,6 @@ router.post('/addCart',(req,res)=>{
 })
 
 router.post('/addBill',(req,res)=>{
-  console.log(req.body)
   controller.addBill(req,res);
 })
 

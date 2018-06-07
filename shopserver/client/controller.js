@@ -127,13 +127,17 @@ let addCart = async (req, res) => {
 let addBill = async (req, res) => {
     let billNO = tools.getOrderNo();
     let date = tools.getNowFormatDate();
+    console.log(billNO,date)
+    console.log(req.body)
     let insertMyQuery = `insert into t_bill (billno,createtime,fee,openid) value ('${billNO}','${date}','${req.body.fee}','${req.body.openid}')`;
-    let insertResult = await mySQL.queryPromise(myQuery1);
+    let insertResult = await mySQL.queryPromise(insertMyQuery);
     try {
+        console.log('ok')
         req.body.goods.forEach( async (element) => {
             let myQuery = `insert into bill_product (billno,pid,number) value (${billNO},${element.pid},${element.num})`;
             let result = await mySQL.queryPromise(myQuery);
             try {
+                console.log(element.pid +':ok')
                 res.send(element.pid +':ok');
             } catch (error) {
                 res.send('insert fail');
