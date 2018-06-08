@@ -129,7 +129,7 @@ let addBill = async (req, res) => {
     let date = tools.getNowFormatDate();
     console.log(billNO,date)
     console.log(req.body)
-    let insertMyQuery = `insert into t_bill (billno,createtime,fee,openid) value ('${billNO}','${date}','${req.body.fee}','${req.body.openid}')`;
+    let insertMyQuery = `insert into t_bill (billno,createtime,fee,openid,address) value ('${billNO}','${date}','${req.body.fee}','${req.body.openid}','${req.body.no}')`;
     let insertResult = await mySQL.queryPromise(insertMyQuery);
     try {
         console.log('ok')
@@ -138,7 +138,7 @@ let addBill = async (req, res) => {
             let result = await mySQL.queryPromise(myQuery);
             try {
                 console.log(element.pid +':ok')
-                res.send(element.pid +':ok');
+                res.send('ok');
             } catch (error) {
                 res.send('insert fail');
             }
