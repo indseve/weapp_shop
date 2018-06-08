@@ -18,7 +18,7 @@ Page({
             success: function (res) {
                 console.log(res.data)
                 self.setData({
-                    goods: res.data
+                    goods: res.data[0]
                 })
             }
         })

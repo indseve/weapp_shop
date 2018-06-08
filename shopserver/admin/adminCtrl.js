@@ -34,7 +34,7 @@ let getProducts = async (req, res)=>{
 
 let addProduct = async (req,res)=>{
     let date = tools.getNowFormatDate();
-    let myQuery = `insert into t_product (productname,price,description,status,parameter,service,weight,createtime) value ('${req.body.productname}','${req.body.price}','${req.body.description}','${req.body.status}','${req.body.parameter}','${req.body.service}','${req.body.weight}','${date}')`;
+    let myQuery = `insert into t_product (productname,price,description,status,parameter,service,weight,type,createtime) value ('${req.body.productname}','${req.body.price}','${req.body.description}','${req.body.status}','${req.body.parameter}','${req.body.service}','${req.body.weight}','${req.body.typeno}','${date}')`;
     let result = await mySQL.queryPromise(myQuery);
     try {
         res.send({
@@ -97,11 +97,23 @@ let getBillProducts = async (req,res)=>{
     }
 }
 
+let modifyProduct = async (req,res)=>{
+    console.log(req.body)
+    let myQuery = `UPDATE t_product SET productname = '${req.body.productname}',price = '${req.body.price}',description ='${req.body.description}',type = '${req.body.typeno}' WHERE pid = ${req.body.pid}`;
+    let result = await mySQL.queryPromise(myQuery);
+    try {
+        res.send('success');
+    } catch (error) {
+        res.send('fail')
+    }
+}
+
 export{
     login,
     getProducts,
     addProduct,
     modifyIsuse,
     getOrders,
-    getBillProducts
+    getBillProducts,
+    modifyProduct
 }

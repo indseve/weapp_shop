@@ -32,4 +32,8 @@ router.post('/getBillProducts',(req,res)=>{
   admin.getBillProducts(req,res);
 })
 
+router.post('/modifyProduct',(req,res)=>{
+  admin.modifyProduct(req,res);
+})
+
 module.exports = router;

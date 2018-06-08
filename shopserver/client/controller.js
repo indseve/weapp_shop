@@ -16,7 +16,7 @@ let getDetail = async (req, res)=>{
 }
 
 let getCommodity = async (req, res)=>{
-    let myQuery = 'SELECT a.pid,productname AS name,price,description AS detail,status,parameter,service,weight,url as image FROM t_product AS a LEFT JOIN t_product_image AS b ON a.pid = b.pid';
+    let myQuery = 'SELECT a.pid,productname AS name,price,description AS detail,status,parameter,service,weight,url as image FROM t_product AS a LEFT JOIN t_product_image AS b ON a.pid = b.pid WHERE isuse = 1';
     let result = await await mySQL.queryPromise(myQuery);
     res.send(result);
 }
