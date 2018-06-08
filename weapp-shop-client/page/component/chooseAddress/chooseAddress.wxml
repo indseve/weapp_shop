@@ -1,0 +1,20 @@
+<!--page/chooseAddress/chooseAddress.wxml-->
+<view class="main">
+<view class='infoBox' wx:for="{{myAddress}}">
+    <view class='address' bindtap='chooseAddress' data-info = "{{item}}">
+        <view class='nametel'>
+            <text class='name'>{{item.name}}</text>
+            <text class='tel'>{{item.tel}}</text>
+        </view>
+        <view class='detail'>
+            <text space='nbsp'>{{item.province}}{{item.city}}{{item.district}}    {{item.detail}}</text>
+        </view>
+    </view>
+    <view class='tools'>
+        <view class='edit' bindtap='modifyAddress' data-info = "{{item}}">编辑</view>
+        <view class='del' bindtap='delAddress' data-no = "{{item.no}}">删除</view>
+    </view>    
+</view>
+<view class='blank'></view>
+<button class='address-add' bindtap='addressAdd'>新增地址</button>
+</view>

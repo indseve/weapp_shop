@@ -10,7 +10,7 @@
         "page/component/list/list",
         "page/component/myAddress/myAddress",
         "page/component/userinfo/userinfo",
-        "page/chooseAddress/chooseAddress"
+        "page/component/chooseAddress/chooseAddress"
     ],
     "window": {
         "navigationBarTextStyle": "#ffffff",

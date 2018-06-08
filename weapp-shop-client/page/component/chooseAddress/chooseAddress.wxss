@@ -1,0 +1,55 @@
+/* page/chooseAddress/chooseAddress.wxss */
+@import '../../common/common.wxss';
+@import '../../common/weui.wxss';
+
+page {
+    background-color: #ededed;
+}
+
+.address {
+    background-color: white;
+    margin-bottom: 1rpx;
+    padding: 3%;
+}
+
+.nametel {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 50rpx;
+    margin-bottom: 3%;
+}
+
+.name {
+    font-size: medium;
+}
+
+.detail {
+    background-color: white;
+    font-size: smaller;
+}
+
+.tools {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 50rpx;
+    margin-bottom: 3%;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-bottom: 1%;
+    padding-top: 1%;
+}
+
+.address-add {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+.blank{
+    height: 100rpx
+}

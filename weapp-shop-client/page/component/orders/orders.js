@@ -17,6 +17,15 @@ Page({
         orders:getApp().globalData.goods
     })
  },
+ onShow(){
+     if (getApp().globalData.chooseAdd){
+         console.log(getApp().globalData.chooseAdd)
+         this.setData({
+             address: getApp().globalData.chooseAdd,
+             hasAddress:true
+         })
+     }
+ },
 
 
   /**
@@ -45,7 +54,8 @@ Page({
               data:{
                   goods: self.data.orders,
                   fee: self.data.total,
-                  openid: getApp().globalData.openID
+                  openid: getApp().globalData.openID,
+                  no: getApp().globalData.chooseAdd.no
               },
               method:'POST'
           })

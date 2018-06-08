@@ -13,6 +13,7 @@ App({
     userInfo:{},
     openID:'110',
     isLogin:false,
-    goods:[]
+    goods:[],
+    chooseAdd:''
   }
 })

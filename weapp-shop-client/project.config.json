@@ -32,7 +32,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -68,6 +68,12 @@
 					"id": 5,
 					"name": "订单",
 					"pathName": "page/component/orders/orders",
+					"query": ""
+				},
+				{
+					"id": 6,
+					"name": "选择地址",
+					"pathName": "page/component/chooseAddress/chooseAddress",
 					"query": ""
 				}
 			]
