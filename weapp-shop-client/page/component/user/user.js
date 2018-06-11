@@ -1,5 +1,6 @@
 // page/component/new-pages/user/user.js
 var app = getApp();
+import { config } from '../../../data/config.js'
 Page({
   data:{
     thumb:'',
@@ -7,7 +8,8 @@ Page({
     orders:[],
     hasAddress:false,
     address:{},
-    isLogin:app.globalData.isLogin
+    isLogin:app.globalData.isLogin,
+    fkstatus:['未付款','已付款']
   },
   onLoad(){
      let self = this;
@@ -26,30 +28,34 @@ Page({
     /**
      * 发起请求获取订单列表信息
      */
-    wx.request({
-      url: 'http://www.gdfengshuo.com/api/wx/orders.txt',
-      success(res){
-        self.setData({
-          orders: res.data
-        })
-      }
-    })
+     wx.request({
+         url: `http://${config.serverip}:${config.port}/getBill`,
+         data: {
+             openid: app.globalData.openID
+         },
+         method: 'POST',
+         success(res) {
+             self.setData({
+                 orders: res.data
+             })
+         }
+     })
   },
-  onShow(){
-    var self = this;
-    /**
-     * 获取本地缓存 地址信息
-     */
-    wx.getStorage({
-      key: 'address',
-      success: function(res){
-        self.setData({
-          hasAddress: true,
-          address: res.data
-        })
-      }
-    })
-  },
+//   onShow(){
+//     var self = this;
+//     /**
+//      * 获取本地缓存 地址信息
+//      */
+//     wx.getStorage({
+//       key: 'address',
+//       success: function(res){
+//         self.setData({
+//           hasAddress: true,
+//           address: res.data
+//         })
+//       }
+//     })
+//   },
   /**
    * 发起支付请求
    */

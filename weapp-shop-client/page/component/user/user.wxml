@@ -16,16 +16,16 @@
     <view class="orders-box">
         <view class="orders">我的订单</view>
         <view class="orders-list" wx:for="{{orders}}" wx:key="index">
-            <view class="orders-number">订单编号：{{item.number}}</view>
+            <view class="orders-number">订单编号：{{item.billno}}</view>
             <view class="orders-detail">
-                <image src="{{item.thumb}}"></image>
-                <view class="">{{item.name}}</view>
-                <view class="">{{item.count}}</view>
-                <text class="orders-status">{{item.status}}</text>
+                <image src="{{item.image}}"></image>
+                <view class="">{{item.productname}}</view>
+                <view class="">{{item.number}}</view>
+                <text class="orders-status">{{fkstatus[item.fkstatus]}}</text>
             </view>
             <view class="orders-footer">
-                <text>实付：￥{{item.money}}</text>
-                <button size="mini" class="orders-btn" bindtap="payOrders">付款</button>
+                <text>实付：￥{{item.fee}}</text>
+                <button size="mini" wx:if="{{item.fkstatus == 0}}" class="orders-btn" bindtap="payOrders">付款</button>
             </view>
         </view>
     </view>
