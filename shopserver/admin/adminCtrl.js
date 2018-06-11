@@ -1,5 +1,7 @@
 import * as mySQL from "../SQL/mySQL";
-import * as tools from '../client/tools'
+import * as tools from '../client/tools';
+var formidable = require("formidable");  
+var fs = require('fs');
 
 
 let login = async (req,res)=>{
@@ -32,19 +34,21 @@ let getProducts = async (req, res)=>{
     });
 }
 
-let addProduct = async (req,res)=>{
+let addProduct = async (req, res) => {
     let date = tools.getNowFormatDate();
     let myQuery = `insert into t_product (productname,price,description,status,parameter,service,weight,type,createtime) value ('${req.body.productname}','${req.body.price}','${req.body.description}','${req.body.status}','${req.body.parameter}','${req.body.service}','${req.body.weight}','${req.body.typeno}','${date}')`;
     let result = await mySQL.queryPromise(myQuery);
     try {
-        res.send({
-            info:'success'
-        })
-        console.log('success')
+        let imageMyQuery = `insert into t_product_image (pid,url) value ( (SELECT MAX(pid) FROM t_product) ,'${req.body.imageUrl}')`;
+        let imageResult = await mySQL.queryPromise(imageMyQuery);
+        try {
+            res.send('success')
+            console.log('success')
+        } catch (error) {
+            res.send('fail')
+        }
     } catch (error) {
-        res.send({
-            info:'fail'
-        })
+        res.send('fail')
     }
 }
 
@@ -99,13 +103,60 @@ let getBillProducts = async (req,res)=>{
 
 let modifyProduct = async (req,res)=>{
     console.log(req.body)
-    let myQuery = `UPDATE t_product SET productname = '${req.body.productname}',price = '${req.body.price}',description ='${req.body.description}',type = '${req.body.typeno}' WHERE pid = ${req.body.pid}`;
+    let myQuery = `UPDATE t_product a,t_product_image b SET a.productname = '${req.body.productname}',a.price = '${req.body.price}',a.description ='${req.body.description}',a.type = '${req.body.typeno}',b.url = '${req.body.imageUrl}' WHERE a.pid = ${req.body.pid} AND b.pid = ${req.body.pid}`;
     let result = await mySQL.queryPromise(myQuery);
     try {
         res.send('success');
     } catch (error) {
-        res.send('fail')
+        res.send(error)
     }
+}
+
+let upImage = (req, res) => {
+    let form = new formidable.IncomingForm(); //创建上传表单
+    form.encoding = 'utf-8'; //设置编辑
+    form.uploadDir = 'public/images/'; //设置上传目录
+    form.keepExtensions = true; //保留后缀
+    form.maxFieldsSize = 2 * 1024 * 1024; //文件大小
+
+    form.parse(req, function (err, fields, files) {
+
+        if (err) {
+            res.locals.error = err;
+            res.render('index', {
+                title: TITLE
+            });
+            return;
+        }
+        console.log(files.file.path);
+
+        var extName = ''; //后缀名
+        switch (files.file.type) {
+            case 'image/pjpeg':
+                extName = 'jpg';
+                break;
+            case 'image/jpeg':
+                extName = 'jpg';
+                break;
+            case 'image/png':
+                extName = 'png';
+                break;
+            case 'image/x-png':
+                extName = 'png';
+                break;
+        }
+
+        var avatarName = Math.random() + '.' + extName;
+        //图片写入地址；
+        var newPath = form.uploadDir + avatarName;
+        //显示地址；
+        var showUrl = 'http://127.0.0.1:5757/images/' + avatarName;
+        console.log("newPath", newPath);
+        fs.renameSync(files.file.path, newPath); //重命名
+        res.json({
+            "newPath": showUrl
+        });
+    });
 }
 
 export{
@@ -115,5 +166,6 @@ export{
     modifyIsuse,
     getOrders,
     getBillProducts,
-    modifyProduct
+    modifyProduct,
+    upImage
 }

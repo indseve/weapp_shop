@@ -148,6 +148,37 @@ let addBill = async (req, res) => {
     }
 }
 
+
+let getBill = async (req,res)=>{
+    // let data = {
+    //     bill:'',
+    //     product:''
+    // };
+    // let billMyQuery = `SELECT billno,createtime,fee,ifsend,fkstatus,address FROM t_bill WHERE openid = '${req.body.openid}' ORDER BY createtime DESC`;
+    // let billResult  = await mySQL.queryPromise(billMyQuery);
+    // try {
+    //     data.bill = billResult[0];
+    //     let productMyQuery = `SELECT a.pid,number,productname,price,url AS image FROM bill_product AS a LEFT JOIN t_product AS b ON a.pid = b.pid  LEFT JOIN t_product_image AS c ON a.pid = c.pid WHERE a.billno  = ${data.bill.billno}`;
+    //     let productResult  = await mySQL.queryPromise(productMyQuery);
+    //     try {
+    //         data.product = productResult[0];
+    //         res.send(data);
+    //     } catch (error1) {
+    //        res.send('fail product');
+    //     }
+    // } catch (error2) {
+    //     res.send('fail bill');
+    // }
+
+    let myQuery = `SELECT a.billno,a.createtime,fee,ifsend,fkstatus,address,number,productname,price,url AS image FROM t_bill a LEFT JOIN bill_product b ON a.billno = b.billno LEFT JOIN t_product AS c ON c.pid = b.pid LEFT JOIN t_product_image AS d ON b.pid = d.pid WHERE openid = ${req.body.openid} GROUP BY a.billno`;
+    let result = await mySQL.queryPromise(myQuery);
+    try {
+        res.send(result);
+    } catch (error) {
+        res.send('fail');
+    }
+}
+
 export {
     getDetail,
     getCommodity,
@@ -160,5 +191,6 @@ export {
     delCart,
     modifyCart,
     addCart,
-    addBill
+    addBill,
+    getBill
 };

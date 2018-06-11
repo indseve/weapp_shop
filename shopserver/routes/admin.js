@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+// var multipart = require('connect-multiparty');
+
+// var multipartMiddleware = multipart();
 
 import * as admin from '../admin/adminCtrl'
 
@@ -36,4 +39,7 @@ router.post('/modifyProduct',(req,res)=>{
   admin.modifyProduct(req,res);
 })
 
+router.post('/upImage', (req, res) => {
+  admin.upImage(req,res);
+})
 module.exports = router;
