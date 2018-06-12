@@ -1,12 +1,10 @@
 import request from '@/utils/request'
 
-const serverIP = '127.0.0.1';
-
-const port = '5757';
+import config from '@/shop_config//shop_config'
 
 export function fetchList(query) {
   return request({
-    url: `http://${serverIP}:${port}/admin/orders`,
+    url: `http://${config.serverip}:${config.port}/orders`,
     method: 'get',
     params: query
   })
@@ -14,7 +12,7 @@ export function fetchList(query) {
 
 export function productList(data) {
   return request({
-    url: `http://${serverIP}:${port}/admin/getBillProducts`,
+    url: `http://${config.serverip}:${config.port}/getBillProducts`,
     method: 'post',
     data
   })

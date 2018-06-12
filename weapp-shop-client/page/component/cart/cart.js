@@ -5,7 +5,7 @@ Page({
         carts: [],               // 购物车列表
         hasList: false,          // 列表是否有数据
         totalPrice: 0,           // 总价，初始为0
-        selectAllStatus: true,    // 全选状态，默认全选
+        selectAllStatus: false,    // 全选状态，默认全选
         isEdit: false,
         edit: '编辑'
         // obj:{
@@ -28,6 +28,12 @@ Page({
                 }
                 console.log(this.data)
             }
+        })
+        this.setData({
+            selectselectAllStatus: false,    // 全选状态，默认不全选
+            isEdit: false,
+            edit: '编辑',
+            totalPrice: 0
         })
     },
     //   onShow() {
@@ -178,7 +184,7 @@ Page({
             }
         }
         this.setData({                                // 最后赋值到data中渲染到页面
-            carts: carts,
+            carts,
             totalPrice: total.toFixed(2)
         });
     },
@@ -189,12 +195,14 @@ Page({
             edit = '完成';
         } else {
             edit = '编辑';            
-            let cart = this.data.carts.copyWithin(0);
-            carts.forEach(item=>{
-                delete item.productname;
-                delete item.image;
-                delete item.price;
-            })
+            let carts = [];
+            this.data.carts.map(item =>{return carts.push({pid: item.pid,num: item.num})});
+            // carts.forEach(item=>{
+            //     delete item.productname;
+            //     delete item.image;
+            //     delete item.price;
+            // })
+            console.log(carts)
             wx.request({
                 url: `http://${config.serverip}:${config.port}/modifyCart`,
                 data:{

@@ -63,6 +63,10 @@ router.post('/addCart',(req,res)=>{
   controller.addCart(req,res);
 })
 
+router.post('/addBill',(req,res)=>{
+  controller.addBill(req,res);
+})
+
 router.post('/getBill',(req,res)=>{
   controller.getBill(req,res);
 })

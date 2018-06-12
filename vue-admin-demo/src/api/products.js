@@ -1,12 +1,10 @@
 import request from '@/utils/request'
 
-const serverIP = '127.0.0.1';
-
-const port = '5757';
+import config from '@/shop_config//shop_config'
 
 export function fetchList(query) {
   return request({
-    url: `http://${serverIP}:${port}/admin/products`,
+    url: `http://${config.serverip}:${config.port}/products`,
     method: 'get',
     params: query
   })
@@ -14,7 +12,7 @@ export function fetchList(query) {
 
 export function modifyIsuse(data) {
   return request({
-    url: `http://${serverIP}:${port}/admin/modifyIsuse`,
+    url: `http://${config.serverip}:${config.port}/modifyIsuse`,
     method: 'post',
     data
   })
@@ -22,7 +20,7 @@ export function modifyIsuse(data) {
 
 export function addProduct(data) {
   return request({
-    url: `http://${serverIP}:${port}/admin/addProduct`,
+    url: `http://${config.serverip}:${config.port}/addProduct`,
     method: 'post',
     data
   })
@@ -30,7 +28,7 @@ export function addProduct(data) {
 
 export function modifyProduct(data) {
   return request({
-    url: `http://${serverIP}:${port}/admin/modifyProduct`,
+    url: `http://${config.serverip}:${config.port}/modifyProduct`,
     method: 'post',
     data
   })

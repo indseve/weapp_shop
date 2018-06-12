@@ -87,11 +87,11 @@
       </el-pagination>
     </div>
 
-    <el-dialog :title="temp.pid + '-' + temp.name" :visible.sync="dialogFormVisible">
+    <el-dialog :title="temp.pid + '-' + temp.name" :visible.sync="dialogFormVisible" width="30%">
         <el-tag style="float:right">{{temp.type | typeFilter}}</el-tag>
         <img :src="temp.image" class="image">
         <div style="padding: 14px;">                 
-          <p style="">单价：￥{{temp.price}}<time class="time">{{ temp.createtime | timeFilter }}</time> </p>          
+          <p style="">单价：￥{{temp.price}}<el-tag style="float:right">{{temp.type | typeFilter}}</el-tag> </p>          
           <div class="bottom clearfix">            
             <el-tabs type="border-card">
               <el-tab-pane label="商品详情">
@@ -112,9 +112,9 @@
           </div>
         </div>
        
-      <!-- <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">{{$t('table.cancel')}}</el-button>
-      </div> -->
+      <div slot="footer" class="dialog-footer">
+        <time class="time">{{ temp.createtime | timeFilter }}</time>
+      </div>
     </el-dialog>
   </div>
 </template>

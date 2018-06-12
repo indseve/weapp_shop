@@ -102,7 +102,7 @@ let addCart = async (req, res) => {
     let selectQuery = `SELECT COUNT(*) AS had FROM cart WHERE openid = ${req.body.openid} AND pid = ${req.body.pid} `;
     let selectResult = await mySQL.queryPromise(selectQuery);
     try {
-        if (selectResult.had) { //已存在，修改数值
+        if (selectResult[0].had) { //已存在，修改数值
             let myQuery = `UPDATE cart SET num = (num + '${req.body.num}') WHERE openid = ${req.body.openid} AND pid = ${req.body.pid}`;
             let result = await mySQL.queryPromise(myQuery);
             try {

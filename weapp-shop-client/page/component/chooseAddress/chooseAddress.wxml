@@ -12,7 +12,6 @@
     </view>
     <view class='tools'>
         <view class='edit' bindtap='modifyAddress' data-info = "{{item}}">编辑</view>
-        <view class='del' bindtap='delAddress' data-no = "{{item.no}}">删除</view>
     </view>    
 </view>
 <view class='blank'></view>

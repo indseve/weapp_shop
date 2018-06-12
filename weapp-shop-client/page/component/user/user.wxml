@@ -26,6 +26,7 @@
             <view class="orders-footer">
                 <text>实付：￥{{item.fee}}</text>
                 <button size="mini" wx:if="{{item.fkstatus == 0}}" class="orders-btn" bindtap="payOrders">付款</button>
+                <button size="mini" wx:else="{{item.ifsend == 1}}" class="orders-btn" >收货</button>
             </view>
         </view>
     </view>

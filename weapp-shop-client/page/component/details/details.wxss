@@ -98,11 +98,11 @@
     height: 100rpx;
 }
 .goods-operation-num{
-    width: 160rpx;
+    width: 140rpx;
 }
 .goods-operation-add{
-    width: 80rpx;
-    margin-right: 30rpx;
+    width: 20rpx;
+    margin-right: 50rpx;
 }
 .goods-to-cart{
     width: 210rpx;

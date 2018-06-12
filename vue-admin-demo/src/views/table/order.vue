@@ -211,7 +211,31 @@ export default {
     //   })
     },
     async handleModifyIfsend(row) {
-      if(row.ifsend == 2)
+      if(row.ifsend == 2 && row.fkstatus == 1)
+      {
+        let sendDialgo = await this.$prompt('请输入快递单号', '提示', {
+                                          confirmButtonText: '确认发货',
+                                          cancelButtonText: '取消',
+                                        });
+        try {
+          console.log(sendDialgo)
+           row.ifsend = 1
+           this.$message({
+            type: 'success',
+            message: '发单成功: ' + sendDialgo.value
+          });
+
+        } catch (error) {
+          this.$message({
+            type: 'info',
+            message: '取消发单'
+          });    
+        }
+
+      }
+    },
+    async handleModifyFkstatus(row) {
+      if(row.ifsend == 2 && row.fkstatus == 1)
       {
         let sendDialgo = await this.$prompt('请输入快递单号', '提示', {
                                           confirmButtonText: '确认发货',

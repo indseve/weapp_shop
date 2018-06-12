@@ -28,9 +28,20 @@ Page({
         let num = this.data.num;
         num++;
         this.setData({
-            num: num
+            num
         })
     },
+
+    reduceCount() {
+        let num = this.data.num;
+        if(num > 1){
+            num--;
+            this.setData({
+                num
+            })
+        }
+    },
+
 
     addToCart() {
         let self = this;
