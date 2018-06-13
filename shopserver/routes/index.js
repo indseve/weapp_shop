@@ -11,17 +11,30 @@ router.get('/', function (req, res, next) {
 router.get('/newest', function (req, res, next) {
   controller.getCommodity(req,res);
 });
+
 router.get('/detail', function (req, res, next) {
   controller.getDetail(req,res);
 });
+
 router.get('/test',function(req,res,next){
  controller.getRow(req,res);
 })
+
 router.post('/openid',function(req,res) {
   
 })
 
+router.get('/scroll',function(req,res) {
+  controller.getScroll(req,res)
+})
 
+router.get('/cover',function(req,res) {
+  controller.getCover(req,res)
+})
+
+router.get('/promotion',function(req,res) {
+  controller.getPromotion(req,res)
+})
 /**************************************************************************************************************** */
 /*******************************************地址管理************************************************************** */
 /**************************************************************************************************************** */

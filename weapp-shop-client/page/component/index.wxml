@@ -11,22 +11,26 @@
             <text>精选主题</text>
         </view>
         <view class="select-top">
-            <view class="select-top-small">
-                <navigator url="list/list">
-                    <image src="/image/s1.png"></image>
-                </navigator>
-            </view>
-            <view class="select-top-small">
+            <block wx:for="{{promotion}}" wx:key="name">
+                <view class="select-top-small" wx:if="{{item.size == 'mini'}}" >
+                    <navigator url="list/list?name={{item.name}}">
+                        <image src="{{baseUrl + item.cover}}"></image>
+                    </navigator>
+                </view>
+            </block>
+            <!-- <view class="select-top-small">
                 <navigator url="list/list">
                     <image src="/image/s2.png"></image>
                 </navigator>
-            </view>
+            </view> -->
         </view>
-        <view class="select-bottom">
-            <navigator url="list/list">
-                <image src="/image/s3.png"></image>
+        <block wx:for="{{promotion}}" wx:key="name">
+        <view class="select-bottom" wx:if="{{item.size == 'max'}}">
+            <navigator url="list/list?name={{item.name}}">
+                <image src="{{baseUrl + item.cover}}"></image>
             </navigator>
         </view>
+        </block>
     </view>
     <view class="newest">
         <view class="newest-title">
@@ -35,13 +39,13 @@
         <view class="newest-box">
             <view class="newest-list" wx:for="{{newest}}" wx:key="no">
                 <navigator url="details/details?pid={{item.pid}}" hover-class="navigator-hover">
-                <image src="{{item.image}}"></image>
-                <view class="newest-text">
-                    <text decode="{{true}}" space="{{true}}">{{item.name}}&nbsp;&nbsp;{{item.weight}}</text>
-                </view>
-                <view class="newest-text">
-                    <text>￥ {{item.price}}</text>
-                </view>
+                    <image src="{{item.image}}"></image>
+                    <view class="newest-text">
+                        <text decode="{{true}}" space="{{true}}">{{item.name}}&nbsp;&nbsp;{{item.weight}}</text>
+                    </view>
+                    <view class="newest-text">
+                        <text>￥ {{item.price}}</text>
+                    </view>
                 </navigator>
             </view>
         </view>

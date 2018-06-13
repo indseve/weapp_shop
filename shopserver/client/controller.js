@@ -1,5 +1,7 @@
 import * as mySQL from "../SQL/mySQL";
 import * as tools from './tools'
+import { scrollImage,promotionData } from '../globaldata'
+import { REFUSED } from "dns";
 // import {
 //     fail
 // } from "assert";
@@ -24,6 +26,27 @@ let getCommodity = async (req, res)=>{
 let getRow = async (req, res)=>{
     let result = await mySQL.queryPromise('select  * from user_address');
     
+}
+
+let getScroll = (req,res)=>{
+    res.send(scrollImage);
+}
+
+let getCover = (req,res)=>{
+    let baseUrl = promotionData.baseUrl
+    let promotion = promotionData.promotion.map(item => { return {name:item.name,cover:baseUrl + '/' + item.cover,size:item.size} });    
+    res.send(promotion);
+}
+
+let getPromotion = async (req,res)=>{
+    let promotion = promotionData.promotion.filter(item => item.name == req.query.name)[0];
+    let range = '';
+    promotion.list.forEach(item =>{range = item + ',' + range});
+    range = range.slice(0,range.length-1)
+    let myQuery = `SELECT a.pid,productname,price,url AS image FROM t_product a LEFT JOIN t_product_image b ON a.pid = b.pid WHERE a.pid IN (${range}) AND isuse = 1`;
+    let result = await await mySQL.queryPromise(myQuery);
+    let header = promotionData.baseUrl + '/' + promotion.header;
+    res.send({list:result,header})
 }
 
 /**************************************************************************************************************** */
@@ -179,6 +202,8 @@ let getBill = async (req,res)=>{
     }
 }
 
+
+
 export {
     getDetail,
     getCommodity,
@@ -192,5 +217,8 @@ export {
     modifyCart,
     addCart,
     addBill,
-    getBill
+    getBill,
+    getScroll,
+    getCover,
+    getPromotion
 };
